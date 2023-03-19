@@ -10,8 +10,11 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (value) {
-        if(value!.isEmpty){
+        if(value?.isEmpty ?? true){
           return 'Required*';
+        }
+        else{
+          return null;
         }
       },
       style: const TextStyle(color: Colors.black),
