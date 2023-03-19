@@ -59,7 +59,7 @@ class _NotesFormState extends State<NotesForm> {
                   showSnackBar(
                       context, 'Success !', Colors.green);
                 } else {
-                   autovalidateMode=AutovalidateMode.always;
+                   autovalidateMode=AutovalidateMode.always; // لو الانبوت كان نلل و جيت ادخل داتا التيكت فيلد مش هيبقي احمر
                   setState(() {
 
                   });
