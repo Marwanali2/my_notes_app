@@ -25,52 +25,50 @@ class _NotesFormState extends State<NotesForm> {
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            CustomTextField(
-                label: 'Title',
-                hintText: 'Enter Note Title',
-                onChanged: (data) {
-                  fTitle = data;
-                }),
-            SizedBox(
-              height: 40,
-            ),
-            CustomTextField(
-              label: 'Context',
-              hintText: 'Enter Note Context',
-              maxLines: 10,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          CustomTextField(
+              label: 'Title',
+              hintText: 'Enter Note Title',
               onChanged: (data) {
-                fSubTitle = data;
-              },
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            CustomButton(
-              text: 'Add',
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                 formKey.currentState!.save();
-                  showSnackBar(
-                      context, 'Success !', Colors.green);
-                } else {
-                   autovalidateMode=AutovalidateMode.always; // لو الانبوت كان نلل و جيت ادخل داتا التيكت فيلد مش هيبقي احمر
-                  setState(() {
+                fTitle = data;
+              }),
+          SizedBox(
+            height: 40,
+          ),
+          CustomTextField(
+            label: 'Context',
+            hintText: 'Enter Note Context',
+            maxLines: 10,
+            onChanged: (data) {
+              fSubTitle = data;
+            },
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          CustomButton(
+            text: 'Add',
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+               formKey.currentState!.save();
+                showSnackBar(
+                    context, 'Success !', Colors.green);
+              } else {
+                 autovalidateMode=AutovalidateMode.always; // لو الانبوت كان نلل و جيت ادخل داتا التيكت فيلد مش هيبقي احمر
+                setState(() {
 
-                  });
-                }
-              },
-            ),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
+                });
+              }
+            },
+          ),
+          SizedBox(
+            height: 20,
+          ),
+        ],
       ),
     );
   }
