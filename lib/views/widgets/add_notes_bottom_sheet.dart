@@ -20,14 +20,14 @@ class AddNoteBottomSheet extends StatelessWidget {
             print('failed ${state.errorMessage}');
           }
         },
-        builder: (BuildContext context, state) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          //	- مينفعش استخدم spacer() بداخل ال single child scroll view لان الspacer بيوسع الكونتينر لكن ال single بيعمل shrink يعني بيضغط المحتوي فكده فيه حاجتين عكس بعض
-          // 	- يعني لما اعوز اعمل scrolling  هستخدم sized box  مش spacer
-          child: BlocConsumer<AddNoteCubit, AddNoteState>(
-            listener: (BuildContext context, Object? state) {},
-            builder: (BuildContext context, state) => ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoadingState ? true : false,
+        builder: (BuildContext context, state) => AbsorbPointer(
+          absorbing: state is AddNoteLoadingState?true:false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            //	- مينفعش استخدم spacer() بداخل ال single child scroll view لان الspacer بيوسع الكونتينر لكن ال single بيعمل shrink يعني بيضغط المحتوي فكده فيه حاجتين عكس بعض
+            // 	- يعني لما اعوز اعمل scrolling  هستخدم sized box  مش spacer
+            child: SizedBox(
+              height: 500,
               child: SingleChildScrollView(child: NotesForm()),
             ),
           ),

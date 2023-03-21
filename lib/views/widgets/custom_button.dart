@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
-  CustomButton({this.text,this.onPressed});
+  CustomButton({this.text,this.onPressed,this.isLoading=false});
   String?text;
   VoidCallback?onPressed;
+  final bool  isLoading;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -12,7 +13,14 @@ class CustomButton extends StatelessWidget {
           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)))
       ),
       onPressed: onPressed,
-      child: Text(
+      child: isLoading? SizedBox(
+        height: 24,
+        width: 24,
+        child: CircularProgressIndicator(
+          color: Colors.purple,
+
+        ),
+      ): Text(
         "$text",
         style: TextStyle(
             color: Colors.black,
