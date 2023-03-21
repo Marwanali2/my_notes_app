@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_notes_app/cubit/add_notes_cubit/add_notes_cubit.dart';
+import 'package:my_notes_app/models/note_model.dart';
 import 'package:my_notes_app/views/widgets/showSnackBar.dart';
 
 import 'custom_button.dart';
@@ -55,8 +58,10 @@ class _NotesFormState extends State<NotesForm> {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                formKey.currentState!.save();
-                showSnackBar(
-                    context, 'Success !', Colors.green);
+               NoteModel noteModel=NoteModel(title: fTitle!, subTitle: fSubTitle!, date: DateTime.now().toString(), color: Colors.blue.value);
+               BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                // showSnackBar(
+                //     context, 'Success !', Colors.green);
               } else {
                  autovalidateMode=AutovalidateMode.always; // لو الانبوت كان نلل و جيت ادخل داتا التيكت فيلد مش هيبقي احمر
                 setState(() {
