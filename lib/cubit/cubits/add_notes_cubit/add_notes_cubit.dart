@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_notes_app/constants.dart';
 
-import '../../models/note_model.dart';
+import '../../../models/note_model.dart';
 import 'add_notes_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

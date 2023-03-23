@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_notes_app/cubit/add_notes_cubit/add_notes_cubit.dart';
 import 'package:my_notes_app/models/note_model.dart';
-import 'package:my_notes_app/views/widgets/showSnackBar.dart';
-
-import '../../cubit/add_notes_cubit/add_notes_state.dart';
+import '../../cubit/cubits/add_notes_cubit/add_notes_cubit.dart';
+import '../../cubit/cubits/add_notes_cubit/add_notes_state.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
 
