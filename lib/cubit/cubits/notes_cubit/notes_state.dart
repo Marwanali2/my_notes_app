@@ -6,8 +6,5 @@ class NoteInitialState extends NoteState {}
 
 
 // class NoteSuccessState extends NoteState {
-//   final List<NoteModel> notes;
-//
-//   NoteSuccessState(this.notes);
 //
 // }
