@@ -5,7 +5,7 @@ import '../../cubit/cubits/add_notes_cubit/add_notes_cubit.dart';
 import '../../cubit/cubits/add_notes_cubit/add_notes_state.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
-
+// import 'package:intl/intl.dart';
 class NotesForm extends StatefulWidget {
   NotesForm({Key? key}) : super(key: key);
 
@@ -20,7 +20,7 @@ class _NotesFormState extends State<NotesForm> {
 
   GlobalKey<FormState> formKey = GlobalKey();
 
-  AutovalidateMode autovalidateMode =AutovalidateMode.disabled;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
@@ -53,22 +53,27 @@ class _NotesFormState extends State<NotesForm> {
             height: 50,
           ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
-            builder: (BuildContext context, state) =>
-             CustomButton(
-              isLoading: state is AddNoteLoadingState?true:false,
+            builder: (BuildContext context, state) => CustomButton(
+              isLoading: state is AddNoteLoadingState ? true : false,
               text: 'Add',
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                 formKey.currentState!.save();
-                 NoteModel noteModel=NoteModel(title: fTitle!, subTitle: fSubTitle!, date: DateTime.now().toString(), color: Colors.blue.value);
-                 BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                  formKey.currentState!.save();
+                  var currentDate=DateTime.now();
+                  //var formattedDate=
+                  NoteModel noteModel = NoteModel(
+                    title: fTitle!,
+                    subTitle: fSubTitle!,
+                    date: '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}/at ${DateTime.now().hour}: ${DateTime.now().minute} O\'Clock ', // اعمل فورمات للتاريخ
+                    color: Colors.blue.value,
+                  );
+                  BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                   // showSnackBar(
                   //     context, 'Success !', Colors.green);
                 } else {
-                   autovalidateMode=AutovalidateMode.always; // لو الانبوت كان نلل و جيت ادخل داتا التيكت فيلد مش هيبقي احمر
-                  setState(() {
-
-                  });
+                  autovalidateMode = AutovalidateMode
+                      .always; // لو الانبوت كان نلل و جيت ادخل داتا التيكت فيلد مش هيبقي احمر
+                  setState(() {});
                 }
               },
             ),

@@ -6,6 +6,7 @@ import '../notes_edit_view.dart';
 class NotesItem extends StatelessWidget {
   const NotesItem({Key? key, required this.note}) : super(key: key);
   final NoteModel note;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,27 +21,30 @@ class NotesItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(top: 24, bottom: 24),
         decoration: BoxDecoration(
-            color: Color(note.color),
-            borderRadius: BorderRadius.circular(16)),
+          color: Color(note.color),
+          borderRadius: BorderRadius.circular(16),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile(
-              title: Text(note.title,
-                  style: const TextStyle(fontSize: 20, color: Colors.black)),
+              title: Text(
+                note.title,
+                style: const TextStyle(fontSize: 20, color: Colors.black),
+              ),
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(note.subTitle,
-                    style: TextStyle(
-                        fontSize: 15, color: Colors.black.withOpacity(0.4))),
+                  style: TextStyle(
+                    fontSize: 15, color: Colors.black.withOpacity(0.4),),),
               ),
               trailing: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.black,
-                    size: 30,
-                  )),
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.black,
+                  size: 30,
+                ),),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 24),
