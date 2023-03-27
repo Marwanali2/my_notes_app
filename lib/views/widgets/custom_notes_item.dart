@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_notes_app/models/note_model.dart';
+import 'package:my_notes_app/views/widgets/showSnackBar.dart';
 
 import '../notes_edit_view.dart';
 
@@ -34,17 +35,29 @@ class NotesItem extends StatelessWidget {
               ),
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 25),
-                child: Text(note.subTitle,
+                child: Text(
+                  note.subTitle,
                   style: TextStyle(
-                    fontSize: 15, color: Colors.black.withOpacity(0.4),),),
+                    fontSize: 15,
+                    color: Colors.black.withOpacity(0.4),
+                  ),
+                ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  note.delete();
+                  showSnackBar(
+                    context,
+                    'The note has been deleted',
+                    Colors.red,
+                  );
+                },
                 icon: const Icon(
                   Icons.delete,
                   color: Colors.black,
                   size: 30,
-                ),),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 24),
