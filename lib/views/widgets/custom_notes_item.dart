@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_notes_app/models/note_model.dart';
 import 'package:my_notes_app/views/widgets/showSnackBar.dart';
 
+import '../../cubit/cubits/notes_cubit/notes_cubit.dart';
 import '../notes_edit_view.dart';
 
 class NotesItem extends StatelessWidget {
@@ -15,7 +17,7 @@ class NotesItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EditNotesView(),
+            builder: (context) => EditNotesView(note: note),
           ),
         );
       },
@@ -36,7 +38,7 @@ class NotesItem extends StatelessWidget {
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
-                  note.subTitle,
+                  note.content,
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black.withOpacity(0.4),
@@ -46,6 +48,8 @@ class NotesItem extends StatelessWidget {
               trailing: IconButton(
                 onPressed: () {
                   note.delete();
+                  BlocProvider.of<NoteCubit>(context).fetchAllNotes(); //  when you emit a new state, any widgets that are listening to the BLoC or Cubit will be notified and rebuilt with the new state
+                  // when execute fetchAllNotes it refresh notes and emit success state which rebuild the custom note item
                   showSnackBar(
                     context,
                     'The note has been deleted',

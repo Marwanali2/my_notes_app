@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_notes_app/models/note_model.dart';
-import '../../cubit/cubits/add_notes_cubit/add_notes_cubit.dart';
-import '../../cubit/cubits/add_notes_cubit/add_notes_state.dart';
-import 'custom_button.dart';
-import 'custom_text_field.dart';
+import '../cubit/cubits/add_notes_cubit/add_notes_cubit.dart';
+import '../cubit/cubits/add_notes_cubit/add_notes_state.dart';
+import 'widgets/custom_button.dart';
+import 'widgets/custom_text_field.dart';
 // import 'package:intl/intl.dart';
 class NotesForm extends StatefulWidget {
   NotesForm({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class NotesForm extends StatefulWidget {
 class _NotesFormState extends State<NotesForm> {
   String? fTitle;
 
-  String? fSubTitle;
+  String? fContent;
 
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -46,24 +46,23 @@ class _NotesFormState extends State<NotesForm> {
             hintText: 'Enter Note Context',
             maxLines: 10,
             onChanged: (data) {
-              fSubTitle = data;
+              fContent = data;
             },
           ),
           SizedBox(
             height: 50,
           ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
-            builder: (BuildContext context, state) => CustomButton(
+            builder: ( context, state) => CustomButton(
               isLoading: state is AddNoteLoadingState ? true : false,
               text: 'Add',
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  var currentDate=DateTime.now();
-                  //var formattedDate=
+
                   NoteModel noteModel = NoteModel(
                     title: fTitle!,
-                    subTitle: fSubTitle!,
+                    content: fContent!,
                     date: '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}/at ${DateTime.now().hour}: ${DateTime.now().minute} O\'Clock ', // اعمل فورمات للتاريخ
                     color: Colors.blue.value,
                   );
