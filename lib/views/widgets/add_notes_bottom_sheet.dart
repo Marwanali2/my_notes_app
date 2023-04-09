@@ -12,26 +12,31 @@ class AddNoteBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-     create:  (context) => AddNoteCubit(),
+      create: (context) => AddNoteCubit(),
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (BuildContext context, Object? state) {
           if (state is AddNoteSuccessState) {
             BlocProvider.of<NoteCubit>(context).fetchAllNotes();
             Navigator.pop(context);
           } else if (state is AddNoteFailureState) {
-
             print('failed ${state.errorMessage}');
           }
         },
         builder: (BuildContext context, state) => AbsorbPointer(
-          absorbing: state is AddNoteLoadingState?true:false,
+          absorbing: state is AddNoteLoadingState ? true : false,
           child: Padding(
-            padding:  EdgeInsets.only(left: 8,right: 8,bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+              left: 8,
+              right: 8,
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
             //	- مينفعش استخدم spacer() بداخل ال single child scroll view لان الspacer بيوسع الكونتينر لكن ال single بيعمل shrink يعني بيضغط المحتوي فكده فيه حاجتين عكس بعض
             // 	- يعني لما اعوز اعمل scrolling  هستخدم sized box  مش spacer
             child: SizedBox(
               height: 500,
-              child: SingleChildScrollView(child: NotesForm()),
+              child: SingleChildScrollView(
+                child: NotesForm(),
+              ),
             ),
           ),
         ),
