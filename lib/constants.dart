@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 const kNotesBox='notes_box';
 
 List<Color> kColors= const [
-  Color(0xffE18B43),
-  Color(0xff65393A),
-  Color(0xffaf4c9b),
-  Color(0xff414A45),
-
+  Color(0xffab5852),
+  Color(0xffeadaa0),
+  Color(0xffd69e49),
+  Color(0xff838469),
+  Color(0xff476066),
 ];

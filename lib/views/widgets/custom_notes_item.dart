@@ -47,6 +47,46 @@ class NotesItem extends StatelessWidget {
               ),
               trailing: IconButton(
                 onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Delete Note'),
+                        content: Text('Are you sure you want to delete this note?'),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            child: Text('Delete'),
+                            onPressed: () {
+                              note.delete();
+                              BlocProvider.of<NoteCubit>(context).fetchAllNotes();
+                              showSnackBar(
+                                context,
+                                'The note has been deleted',
+                                Colors.red,
+                              );
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.black,
+                  size: 30,
+                ),
+              ),
+                /*
+                IconButton(
+                onPressed: () {
                   note.delete();
                   BlocProvider.of<NoteCubit>(context).fetchAllNotes(); //  when you emit a new state, any widgets that are listening to the BLoC or Cubit will be notified and rebuilt with the new state
                   // when execute fetchAllNotes it refresh notes and emit success state which rebuild the custom note item
@@ -62,6 +102,9 @@ class NotesItem extends StatelessWidget {
                   size: 30,
                 ),
               ),
+                 */
+
+
             ),
             Padding(
               padding: const EdgeInsets.only(right: 24),
