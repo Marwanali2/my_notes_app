@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_notes_app/views/widgets/showSnackBar.dart';
-
 import '../../cubit/cubits/notes_cubit/notes_cubit.dart';
 import '../../models/note_model.dart';
 import 'custom_app_bar.dart';
 import 'custom_text_field.dart';
+import 'edit_note_colors_list.dart';
+
+int? newColor;
 
 class EditNotesViewBody extends StatefulWidget {
   const EditNotesViewBody({Key? key, required this.note}) : super(key: key);
@@ -36,7 +38,7 @@ class _EditNotesViewBodyState extends State<EditNotesViewBody> {
                 widget.note.content = content ?? widget.note.content;
                 widget.note.save();
 
-                  BlocProvider.of<NoteCubit>(context).fetchAllNotes();
+                BlocProvider.of<NoteCubit>(context).fetchAllNotes();
 
                 Navigator.pop(context);
                 snackStatus(context);
@@ -63,6 +65,12 @@ class _EditNotesViewBodyState extends State<EditNotesViewBody> {
                 content = value;
               },
             ),
+            const SizedBox(
+              height: 40,
+            ),
+            EditNoteColorsList(
+              note: widget.note,
+            ),
           ],
         ),
       ),
@@ -71,24 +79,59 @@ class _EditNotesViewBodyState extends State<EditNotesViewBody> {
 
   void snackStatus(BuildContext context) {
     if (widget.note.title == title &&
-        widget.note.content == content) {
+        widget.note.content == content &&
+        widget.note.color == newColor) {
       showSnackBar(
         context,
-        'The note title and content has been edited',
+        'The note title , content and color has been edited',
         Colors.green,
       );
     } else if (widget.note.title == title &&
-        widget.note.content != content) {
+        widget.note.content != content &&
+        widget.note.color != newColor) {
       showSnackBar(
         context,
         'The note title only has been edited',
         Colors.green,
       );
     } else if (widget.note.title != title &&
-        widget.note.content == content) {
+        widget.note.content == content &&
+        widget.note.color != newColor) {
       showSnackBar(
         context,
         'The note content only has been edited',
+        Colors.green,
+      );
+    } else if (widget.note.title != title &&
+        widget.note.content != content &&
+        widget.note.color == newColor) {
+      showSnackBar(
+        context,
+        'The note Color only has been edited',
+        Colors.green,
+      );
+    } else if (widget.note.title == title &&
+        widget.note.content == content &&
+        widget.note.color != newColor) {
+      showSnackBar(
+        context,
+        'The note title and content  has been edited',
+        Colors.green,
+      );
+    } else if (widget.note.title == title &&
+        widget.note.content != content &&
+        widget.note.color == newColor) {
+      showSnackBar(
+        context,
+        'The note title and Color only has been edited',
+        Colors.green,
+      );
+    } else if (widget.note.title != title &&
+        widget.note.content == content &&
+        widget.note.color == newColor) {
+      showSnackBar(
+        context,
+        'The note content and Color only has been edited',
         Colors.green,
       );
     } else {
