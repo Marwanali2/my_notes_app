@@ -13,7 +13,8 @@ class AddNoteBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AddNoteCubit(),
-      child: BlocConsumer<AddNoteCubit, AddNoteState>(
+      child: BlocConsumer<
+          AddNoteCubit, AddNoteState>(
         listener: (BuildContext context, Object? state) {
           if (state is AddNoteSuccessState) {
             BlocProvider.of<NoteCubit>(context).fetchAllNotes();
